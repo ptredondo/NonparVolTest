@@ -1,12 +1,19 @@
 Package: NonparVolTest
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Nonparametric Test for Volatility in Clustered Multiple Time Series
+Version: 1.0.0.1
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Paolo Victor", "Redondo", , "paolovictor.redondo@kaust.edu.sa", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-7251-8464"))
+Description: This package provides functions to perform the following: (i) generate observations from the multiple time series with clustered volatility (ARCH-type), (ii) estimate the parameters of the multiple time series with clustered volatility (ARCH-type) model through the backfitting algorithm, and (iii) compute the bootstrap confidence interval for the slope parameters of the clustered volatility (ARCH-type) model.
+License: MIT + file LICENSE
 Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Imports: 
+    assertthat,
+    dplyr,
+    lme4
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

@@ -1,0 +1,55 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# NonparVolTest
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+`NonparVolTest` provides provides functions to perform the following: (i) generate observations from the multiple time series with clustered volatility (ARCH-type), (ii) estimate the parameters of the multiple time series with clustered volatility (ARCH-type) model through the backfitting algorithm, and (iii) compute the bootstrap confidence interval for the slope parameters of the clustered volatility (ARCH-type) model.
+
+## Installation
+
+You can install the most recent version of `NonparVolTest` in the following way
+
+``` r
+library(devtools)
+devtools::install_github("ptredondo/NonparVolTest", build_vignettes = TRUE)
+```
+
+## Example
+
+As a simple example, suppose we want to simulate from the multiple time series with clustered volatility model and perform the nonparametric test for clustered volatility based on a bootstrap resampling scheme. Here, we generate data with two clusters of time series from three different scenarios: (i) no ARCH-type volatility, (ii) only one cluster has ARCH-type volatility, and (iii) both clusters have ARCH-type volatility.
+
+```{r example}
+library(NonparVolTest)
+
+set.seed(1)
+Mydata <- clus_vol_gendata(Nlength = 100,clusizes = c(5,5),phi = 0.6,rand.mean = rep(0,10),rand.sd = rep(1,10),
+                           vol.par0 = c(1,1),vol.par1 = c(0,0),nburn = 500,seed = 1)
+nonpar_vol_estimate(Mydata)
+nonpar_vol_test(Mydata,B = 100,max.iter=100,cut=0.00001)
+
+set.seed(2)
+Mydata <- clus_vol_gendata(Nlength = 100,clusizes = c(5,5),phi = 0.6,rand.mean = rep(0,10),rand.sd = rep(1,10),
+                          vol.par0 = c(1,1),vol.par1 = c(0,0.4),nburn = 500,seed = 1)
+nonpar_vol_test(Mydata,B = 100,max.iter=100,cut=0.00001)
+
+set.seed(3)
+Mydata <- clus_vol_gendata(Nlength = 100,clusizes = c(5,5),phi = 0.6,rand.mean = rep(0,10),rand.sd = rep(1,10),
+                           vol.par0 = c(1,1),vol.par1 = c(0.4,0.4),nburn = 500,seed = 1)
+nonpar_vol_test(Mydata,B = 100,max.iter=100,cut=0.00001)
+```
+

@@ -40,21 +40,6 @@ library(NonparVolTest)
 set.seed(1)
 Mydata <- clus_vol_gendata(Nlength = 100,clusizes = c(5,5),phi = 0.6,rand.mean = rep(0,10),rand.sd = rep(1,10),
                            vol.par0 = c(1,1),vol.par1 = c(0,0),nburn = 500,seed = 1)
-nonpar_vol_estimate(Mydata)
-#> $num_iter
-#> [1] 3
-#> 
-#> $ar
-#> [1] 0.5542969
-#> 
-#> $reff
-#>  [1] -0.7246840  0.3744794  0.7196013 -1.1297625  0.8950063  0.5618643
-#>  [7]  0.5071534  0.7365715  0.6285816 -1.8214840
-#> 
-#> $vol_par
-#>   clus    int_n      slope_n
-#> 1    1 1.156419 -0.019085717
-#> 2    2 1.011227 -0.003209263
 nonpar_vol_test(Mydata,B = 100,max.iter=100,cut=0.00001)
 #> $`Number of Iterations`
 #> [1] 3
